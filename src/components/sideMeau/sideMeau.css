@@ -1,0 +1,25 @@
+.side_meau {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.side_meau .top_bar {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.side_meau .top_bar .logo {
+  width: 40px;
+  margin: 0 20px 0 10px;
+  border-radius: 50%;
+}
+.side_meau .top_bar .title {
+  font-size: 20px;
+  color: #fff;
+}
+.side_meau .meau {
+  flex: 1;
+  overflow: auto;
+}

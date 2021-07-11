@@ -1,0 +1,22 @@
+.login {
+  background-color: #232741;
+  height: 100%;
+}
+.login .title {
+  font-size: 30px ;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.login .login_form {
+  position: fixed;
+  width: 400px;
+  height: 300px;
+  background-color: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+}
+.login .login-form-button {
+  width: 100%;
+}

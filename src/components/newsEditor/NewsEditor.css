@@ -1,0 +1,12 @@
+.editor {
+  padding: 0 100px ;
+}
+.editor .toolbar {
+  border: 1px solid #ccc;
+}
+.editor .editor {
+  height: 200px;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid #ccc;
+}

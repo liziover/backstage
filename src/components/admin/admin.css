@@ -1,0 +1,14 @@
+.admin {
+  height: 100%;
+}
+.admin .content {
+  height: 100%;
+  margin: 10px 20px;
+  background-color: #fff;
+  padding: 20px;
+  overflow: auto;
+}
+.admin .footer {
+  font-size: 14px;
+  text-align: center;
+}

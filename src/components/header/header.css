@@ -1,0 +1,20 @@
+.header {
+  height: 80px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding-right: 50px;
+}
+.header .title {
+  width: 25%;
+  font-size: 20px;
+  text-align: center;
+}
+.header .userInfo {
+  width: 75%;
+  text-align: right;
+}
+.header .userInfo .user {
+  margin: 0 10px;
+  color: #1890ff;
+}
