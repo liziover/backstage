@@ -24,7 +24,6 @@ function SideMeau(props) {
        return item.pagepermisson && rights.includes(item.key)
     }
 
-    // 创建meau的回调
     const renderMeau = (meauList) => {
         return meauList.map(item => {
             if (item.children?.length > 0 && checkPagepermisson(item)) {

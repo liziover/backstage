@@ -17,7 +17,6 @@ function UserPublish (type) {
         fetchData()
     }, [username,type])
 
-    // 处理删除新闻的回调
     const handleDelete = (id) => {
         confirm({
             title: '您确定要删除已下线的这条新闻么?',
@@ -25,7 +24,6 @@ function UserPublish (type) {
             cancelText: '取消',
             onOk() {
                 setdataSource(dataSource.filter(data => data.id !== id))
-                // 后端删除新闻
                 delNews(id)
             },
             onCancel() {
@@ -33,10 +31,8 @@ function UserPublish (type) {
           });
     }
 
-    //  处理下线新闻的回调
     const handleSunset = (id) => {
         setdataSource(dataSource.filter(data => data.id !== id))
-        // 后端同步数据更新
         axios.patch(`http://localhost:5000/news/${id}`,{
             publishState:3
         })
@@ -48,7 +44,6 @@ function UserPublish (type) {
           });
     }
     
-    // 处理新闻发布的回调
     const handlePublish = (id) => {
         setdataSource(dataSource.filter(data => data.id !== id))
         axios.patch(`http://localhost:5000/news/${id}`,{

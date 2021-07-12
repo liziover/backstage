@@ -17,7 +17,6 @@ export default function Home() {
 
     const { username, region, role: { roleName } } = JSON.parse(localStorage.getItem("token"))
 
-    // 以点击量排序的方式保存到状态中
     useEffect(() => {
         const fetchData = async () => {
             let data = await reqViewNews()
@@ -26,7 +25,6 @@ export default function Home() {
         fetchData()
     }, [])
 
-    //  以点赞量排序的方式保存到状态中
     useEffect(() => {
         const fetchData = async () => {
             let data = await reqStarNews()
@@ -35,7 +33,6 @@ export default function Home() {
         fetchData()
     }, [])
 
-    // 将所有已发布的文章保存到状态中
     useEffect(() => {
         const fetchData = async () => {
             let data = await reqPublishNew()
@@ -49,10 +46,8 @@ export default function Home() {
     }, [])
 
     const renderBarView = (obj) => {
-        // 基于准备好的dom，初始化echarts实例
         var myChart = Echarts.init(barRef.current);
 
-        // 指定图表的配置项和数据
         var option = {
             title: {
                 text: '分类图示'
@@ -78,7 +73,6 @@ export default function Home() {
             }]
         };
 
-        // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
         window.onresize = () => {
             myChart.resize()
@@ -86,7 +80,6 @@ export default function Home() {
     }
 
     const renderPieView = () => {
-        // 数据处理
         var currentNews = allNews.filter(item => item.author === username)
         var groupObj = _.groupBy(currentNews, item => item.category.title)
         var list = []

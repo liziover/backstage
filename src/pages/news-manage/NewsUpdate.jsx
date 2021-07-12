@@ -7,13 +7,9 @@ import NewsEditor from '../../components/newsEditor/NewsEditor'
 const { Option } = Select;
 const { Step } = Steps;
 export default function NewsUpdate(props) {
-    // 报错编辑阶段的状态值
     const [currentNews, setcurrentNews] = useState(0)
-    // 保存类别到状态中
     const [newsCategory, setnewsCategory] = useState([])
-    // 将form表单内容保存到状态中
     const [formInfo, setformInfo] = useState({})
-    // 将富文本编辑器的内容保存到状态中
     const [content, setcontent] = useState("")
     const newsForm = useRef(null)
 
@@ -38,11 +34,8 @@ export default function NewsUpdate(props) {
         fetchData()
     }, [props.match.params.id])
 
-    // 处理点击下一步按钮的回调
     const handleNext = () => {
-        // 判断当前撰写是否处于第一步
         if (currentNews === 0) {
-            // 对 form 表单校验
             newsForm.current.validateFields().then(
                 res => {
                     setformInfo(res)
@@ -52,7 +45,6 @@ export default function NewsUpdate(props) {
                 console.log(err);
             })
         } else {
-            // 判断当前文本编辑器用户是否输入内容
             if (content === "" || content.length <= 8) {
                 message.warning('您还没有输入内容', 2);
             } else {
@@ -61,12 +53,10 @@ export default function NewsUpdate(props) {
         }
     }
 
-    // 处理点击上一部按钮的回调
     const handlePrevious = () => {
         setcurrentNews(currentNews - 1)
     }
 
-    // 处理保存到草稿箱、或提交审核的回调
     const handleSave = (auditState) => {
         const data = {
             ...formInfo,

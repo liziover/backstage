@@ -3,14 +3,9 @@ import { PageHeader, Descriptions } from 'antd';
 import moment from 'moment'
 import { reqNewsInfo } from '../../api'
 
-// 审核状态值
 const auditStateList = ["未通过","审核中","已通过","未通过"]
-
-// 发布状态值
 const publishStateList = ["未发布","待发布","已上线","已下线"]
-
 const colorList = ["black","orange","green","red"]
-
 export default function NewsPreview(props) {
     const [newsInfo, setNewsInfo] = useState(null)
     useEffect(() => {

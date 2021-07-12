@@ -31,14 +31,11 @@ export default function AuditList(props) {
         });
     }
 
-    // 撤销的回调
     const handleRervert = (item) => {
-        // 更新页面
         setDataSourse(dataSourse.filter(data => data.id !== item.id))
         const data = {
             auditState: 0
         }
-        // 后端同步
         patchNews(item.id, data)
         notification.info({
             message: `通知`,
@@ -48,7 +45,6 @@ export default function AuditList(props) {
         });
     }
 
-    // 更新的回调
     const handleUpdate = (item) => {
         props.history.push(`/news-manage/update/${item.id}`)
     }

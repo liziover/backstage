@@ -9,10 +9,8 @@ import { reqMeauList,delRight,delChildren,patchRight,patchChildren } from '../..
 
 const { confirm } = Modal;
 export default function RightList() {
-    // 将meauList的数据保存在状态中
     const [rightSource, setRightSource] = useState([])
 
-    // 挂载meauList
     useEffect(() => {
         const fetch = async () => {
             let result = await reqMeauList()
@@ -33,20 +31,13 @@ export default function RightList() {
             title: '你确认要删除吗?',
             icon: <ExclamationCircleOutlined />,
             onOk() {
-                // 判断选中项的菜单级别
                 if (item.grade === 1) {
-                    // 在状态中更新页面菜单数据
                     setRightSource(rightSource.filter(data => data.id !== item.id))
-                    // 后端同步
                     delRight(item.id)
                 } else {
-                    // 筛选出对应的父级菜单项
                     let list = rightSource.filter(data => data.id === item.rightId)
-                    // 删除指定项
                     list[0].children = list[0].children.filter(data => data.id !== item.id)
-                    // 在状态中更新菜单项数据
                     setRightSource([...rightSource])
-                    // 后端同步
                     delChildren(item.id)
                 }
             },
@@ -55,7 +46,6 @@ export default function RightList() {
         });
     }
 
-    // 配置项开关的回调
     const changeCheckedMethod = (item) => {
         item.pagepermisson = item.pagepermisson === 0 ? 1 : 0
         setRightSource([...rightSource])
@@ -67,7 +57,6 @@ export default function RightList() {
         }
     }
 
-    // 列信息
     const columns = [
         {
             title: 'ID',

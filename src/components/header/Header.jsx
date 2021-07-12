@@ -10,7 +10,6 @@ function TopHeader(props) {
 
     const { role: { roleName }, username } = JSON.parse(localStorage.getItem("token"))
 
-    // 用户退出的回调
     const signOut = () => {
         localStorage.removeItem('token')
         props.history.replace('/login')

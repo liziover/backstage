@@ -6,31 +6,25 @@ const { Option } = Select;
 const NewUserForm = forwardRef((props, ref) => {
     const [isDisabled, setisDisabled] = useState(false)
 
-    // 
     useEffect(() => {
         setisDisabled(props.isUpdateDisabled)
     }, [props.isUpdateDisabled])
 
-    // 每次添加完新用户后，接触选择超级管理员后region框的禁用状态
+
     useEffect(() => {
         setisDisabled(props.addUserEnd)
     }, [props.addUserEnd])
 
     const { roleId, region } = JSON.parse(localStorage.getItem('token'))
 
-    // 区域框
     const checkRegionDisabled = (item) => {
-        //判断当前操作时更新用户配置还是添加新的用户
         if (props.isUpdate) {
-            // 判断当前登陆用户是否是超级管理员
             if (roleId === 1) {
                 return false
             } else {
                 return true
             }
         } else {
-            // 判断当前登陆用户是否是超级管理员
-            // 判断当前登陆用户是否是超级管理员
             if (roleId === 1) {
                 return false
             } else {
@@ -39,17 +33,14 @@ const NewUserForm = forwardRef((props, ref) => {
         }
     }
 
-    // 角色
     const checkRoleDisabled = (item) => {
         if (props.isUpdate) {
-            // 判断当前登陆用户是否是超级管理员
             if (roleId === 1) {
                 return false
             } else {
                 return true
             }
         } else {
-            // 判断当前登陆用户是否是超级管理员
             if (roleId === 1) {
                 return false
             } else {

@@ -15,7 +15,6 @@ export default function NewsDraft(props) {
 
     const { username } = JSON.parse(localStorage.getItem("token"))
 
-    // 获取权限列表数据
     useEffect(() => {
         const fetchData = async () => {
             let data = await reqNewsDraft(username)
@@ -24,17 +23,14 @@ export default function NewsDraft(props) {
         fetchData()
     }, [username])
 
-    // 点击按钮删除选中新闻的回调
     const deleteMethod = (item) => {
         confirm({
             title: '你确认要删除吗?',
             icon: <ExclamationCircleOutlined />,
             onOk() {
-                // 更新状态
                 setdataSourse(dataSourse.filter(data => {
                     return data.id !== item.id
                 }))
-                // 后端同步删除
                 delNews(item.id)
             },
             onCancel() {
@@ -42,12 +38,10 @@ export default function NewsDraft(props) {
         });
     }
 
-    // 处理更新内容的回调
     const updateMethod = (item) => {
         props.history.push(`/news-manage/update/${item.id}`)
     }
 
-    // 处理提交的回调
     const subMethod = (item) => {
         const data = {
             auditState: 1

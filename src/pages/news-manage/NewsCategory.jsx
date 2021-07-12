@@ -16,7 +16,6 @@ export default function NewsCategory() {
         fetchData()
     }, [])
 
-    // 保存重新输入的title名称的回调
     const handleSave = (record) => {
         setdataSource(dataSource.map(item => {
             if (item.id === record.id) {
@@ -73,9 +72,7 @@ export default function NewsCategory() {
             okText: "确认",
             cancelText: "取消",
             onOk() {
-                // 删除页面选中项
                 setdataSource(dataSource.filter(data => data.id !== item.id))
-                // 后端同步
                 delCategory(item.id)
             },
             onCancel() {

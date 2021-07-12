@@ -20,16 +20,12 @@ export default function Audit() {
         fetchData()
     }, [username, region])
 
-
-    // 通过还是驳回的回调
     const handleAudit = (item, auditState, publishState) => {
-        // 页面更新
         setDataSourse(dataSourse.filter(data => data.id !== item.id))
         const data = {
             auditState,
             publishState,
         }
-        // 后端同步
         patchNews(item.id, data)
         notification.info({
             message: `通知`,

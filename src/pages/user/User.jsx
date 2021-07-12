@@ -12,17 +12,11 @@ import { roleType } from '../../config/roleType'
 const { confirm } = Modal;
 
 export default function User() {
-    // 将用户列表数据保存到状态中
     const [userList, setUserList] = useState([])
-    // 添加用户Modal组件的展示或隐藏
     const [isAddVisible, setisAddVisible] = useState(false)
-    // 更新用户信息的 Modal 的展示或隐藏状态 
     const [isUpdateVisible, setisUpdateVisible] = useState(false)
-    // 将区域列表保存到状态中
     const [regionList, setregionList] = useState([])
-    // 将角色列表保存到状态中
     const [roleList, setroleList] = useState([])
-    // 更新用户时，区域选择框是否禁用
     const [isUpdateDisabled, setisUpdateDisabled] = useState(false)
     const [addUserEnd, setaddUserEnd] = useState()
     const [updateCurrent, setupdateCurrent] = useState()
@@ -30,11 +24,9 @@ export default function User() {
     const updateForm = useRef(null)
 
     const { roleId, region, username } = JSON.parse(localStorage.getItem("token"))
-    // 发送获取用户数据请求
     useEffect(() => {
         const fetchData = async () => {
             let list = await reqUser()
-            // 判断登陆用户是否是超级管理员权限，如果是则将展示所有管理用户，如果不是则只展示相应区域的用户
             setUserList(roleType[roleId] === "superadmin" ? list : [
                 ...list.filter(item => item.username === username),
                 ...list.filter(item => item.region === region && roleType[item.roleId] === "editor")
@@ -43,7 +35,6 @@ export default function User() {
         fetchData()
     }, [roleId, region, username])
 
-    // 发送获取区域列表请求
     useEffect(() => {
         const fetchData = async () => {
             let result = await reqRegion()
@@ -52,7 +43,6 @@ export default function User() {
         fetchData()
     }, [])
 
-    // 发送获取角色类型请求
     useEffect(() => {
         const fetchData = async () => {
             let result = await reqRole()
@@ -61,16 +51,12 @@ export default function User() {
         fetchData()
     }, [])
 
-
-    // 删除选项的回调
     const deleteMethod = (item) => {
         confirm({
             title: '你确认要删除吗?',
             icon: <ExclamationCircleOutlined />,
             onOk() {
-                // 更新当前页面状态中的用户列表数据
                 setUserList(userList.filter(data => data.id !== item.id))
-                // 后端同步删除用户账号
                 delUser(item.id)
             },
             onCancel() {
@@ -92,24 +78,19 @@ export default function User() {
         setupdateCurrent(item)
     }
 
-    // 更改用户状态开关的回调
     const changeRoleState = (item) => {
         item.roleState = !item.roleState
-        // 更新当前页面状态中的 userList 
         setUserList([...userList])
-        // 后端同步
         const data = {
             roleState: item.roleState
         }
         patchUser(item.id, data)
     }
 
-    // 添加新的用户的回调
     const addUserMethod = () => {
         setisAddVisible(true)
     }
 
-    // 确认添加用户的 Form 表单
     const addFormOk = () => {
         addForm.current.validateFields()
             .then(value => {
@@ -130,12 +111,10 @@ export default function User() {
         setaddUserEnd(false)
     }
 
-    // 确认更新用户配置信息的 Form 表单
     const updateFormOk = () => {
         updateForm.current.validateFields()
             .then(value => {
                 setisUpdateVisible(false)
-                // 更新本地页面
                 setUserList(userList.map(item => {
                     if (item.id === updateCurrent.id) {
                         return {
@@ -147,7 +126,6 @@ export default function User() {
                     return item
                 }))
                 setisUpdateDisabled(!isUpdateDisabled)
-                // 后端同步
                 patchUser(updateCurrent.id, value)
             })
     }
